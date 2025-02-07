@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -28,6 +29,8 @@ public class AdminPageController implements Initializable {
     private Button addVehicleBt;
     @FXML
     private Button deleteBt;
+    @FXML
+    private Button logoutButton;
 
     @FXML
     private TableView<Vehicle> vehicleTable;
@@ -48,6 +51,8 @@ public class AdminPageController implements Initializable {
     private TextField seatingTF;
     @FXML
     private TextField priceTF;
+    @FXML
+    private Button backButton;
     @FXML
     private ComboBox<VehicleType> typeIDCB;
 
@@ -172,7 +177,26 @@ public class AdminPageController implements Initializable {
             System.out.println(vehicle.getId());
             vehicleDAO.deleteVehicle(vehicle.getId());
             vehicleTable.getItems().remove(vehicle);
-            System.out.println("Row deleted!");
+            System.out.println("Törölve!");
+        }
+    }
+
+    @FXML
+    private void backToHome(ActionEvent event) {
+        try {
+            hu.unideb.inf.MainApp.setRoot("HomePage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void logoutUser(ActionEvent event) {
+        SessionManager.logout();
+        try {
+            hu.unideb.inf.MainApp.setRoot("HomePage");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

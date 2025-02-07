@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.HomePageController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.HomePageController">
     <children>
         <AnchorPane prefHeight="732.0" prefWidth="1647.0">
             <children>
@@ -24,11 +20,13 @@
                         <TableColumn fx:id="TypeIDColumn" prefWidth="183.0" text="TypeID" />
                     </columns>
                 </TableView>
-            <Button fx:id="loginBt" layoutX="1139.0" layoutY="14.0" mnemonicParsing="false" onAction="#loginBtClicked" text="Login" />
-            <Button fx:id="registerBt" layoutX="1206.0" layoutY="14.0" mnemonicParsing="false" onAction="#registerBtClicked" text="Register" />
-            <TextField fx:id="searchTf" alignment="TOP_CENTER" layoutX="566.0" layoutY="14.0" promptText="Search" />
-            <Button fx:id="searchBt" layoutX="614.0" layoutY="49.0" mnemonicParsing="false" onAction="#searchBtClicked" text="Search" />
-            <Button fx:id="adminPageBt" layoutX="1045.0" layoutY="14.0" mnemonicParsing="false" onAction="#adminPageBtClicked" text="AdminPage" />
+            <Button fx:id="loginBt" layoutX="1443.0" layoutY="27.0" mnemonicParsing="false" onAction="#loginBtClicked" text="Bejelentkezés" />
+            <Button fx:id="registerBt" layoutX="1544.0" layoutY="27.0" mnemonicParsing="false" onAction="#registerBtClicked" text="Regisztráció" />
+            <Button fx:id="logoutButton" layoutX="21.0" layoutY="27.0" onAction="#logoutUser" text="Kijelentkezés" />
+            <Button fx:id="userPageBt" layoutX="1261.0" layoutY="27.0" onAction="#userPageBtClicked" text="User Page" />
+            <TextField fx:id="searchTf" alignment="TOP_CENTER" layoutX="749.0" layoutY="27.0" promptText="Keresés" />
+            <Button fx:id="searchBt" layoutX="795.0" layoutY="66.0" mnemonicParsing="false" onAction="#searchBtClicked" text="Keresés" />
+            <Button fx:id="adminPageBt" layoutX="1351.0" layoutY="27.0" mnemonicParsing="false" onAction="#adminPageBtClicked" text="AdminPage" />
             </children>
         </AnchorPane>
     </children>

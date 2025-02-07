@@ -5,17 +5,20 @@ import hu.unideb.inf.repository.VehicleDAO;
 import hu.unideb.inf.repository.VehicleDAOImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,13 +26,15 @@ import java.util.ResourceBundle;
 public class UserPageController implements Initializable {
 
     @FXML
-    private Button dieselBt;
-    @FXML
-    private Button gasolineBt;
-    @FXML
-    private Button hybridBt;
-    @FXML
     private Button rentBt;
+    @FXML
+    private Button searchBt;
+    @FXML
+    private TextField searchTf;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Button logoutButton;
 
     @FXML
     private TableView<Vehicle> vehicleTable;
@@ -93,23 +98,49 @@ public class UserPageController implements Initializable {
     }
 
     @FXML
-    void dieselBtClicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    void gasolineBtClicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    void hybridBtClicked(ActionEvent event) {
-
-    }
-
-    @FXML
     void rentBtClicked(ActionEvent event) {
 
+    }
+
+    @FXML
+    private void searchBtClicked(ActionEvent event) {
+        String searchText = searchTf.getText().toLowerCase();
+
+        FilteredList<Vehicle> filteredList = new FilteredList<>(vehicleList, vehicle -> {
+            if (searchText == null || searchText.isEmpty()) {
+                return true;
+            }
+
+            return (vehicle.getVehicleType() != null && vehicle.getVehicleType().toLowerCase().contains(searchText)) ||
+                    (vehicle.getMake() != null && vehicle.getMake().toLowerCase().contains(searchText)) ||
+                    (vehicle.getModel() != null && vehicle.getModel().toLowerCase().contains(searchText)) ||
+                    String.valueOf(vehicle.getYear()).contains(searchText) ||
+                    (vehicle.getEngine() != null && vehicle.getEngine().toLowerCase().contains(searchText)) ||
+                    (vehicle.getFuelType() != null && vehicle.getFuelType().toLowerCase().contains(searchText)) ||
+                    String.valueOf(vehicle.getSeatingCapacity()).contains(searchText) ||
+                    String.valueOf(vehicle.getPrice()).contains(searchText);
+        });
+
+        vehicleTable.setItems(filteredList);
+    }
+
+    @FXML
+    private void backToHome(ActionEvent event) {
+        try {
+            hu.unideb.inf.MainApp.setRoot("HomePage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void logoutUser(ActionEvent event) {
+        SessionManager.logout();
+        try {
+            hu.unideb.inf.MainApp.setRoot("HomePage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

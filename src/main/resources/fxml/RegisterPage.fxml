@@ -10,12 +10,13 @@
    <children>
       <AnchorPane prefHeight="720" prefWidth="1280">
          <children>
-            <Button fx:id="registerBt" layoutX="611.0" layoutY="474.0" mnemonicParsing="false" onAction="#registerBtnClicked" text="Register" />
-            <TextField fx:id="usernameTF" layoutX="565.0" layoutY="222.0" promptText="username" />
-            <TextField fx:id="firstNameTF" layoutX="566.0" layoutY="272.0" promptText="first name" />
-            <TextField fx:id="lastNameTF" layoutX="566.0" layoutY="322.0" promptText="last name" />
-            <TextField fx:id="emailTF" layoutX="565.0" layoutY="372.0" promptText="email" />
-            <PasswordField fx:id="passwordTf" layoutX="566.0" layoutY="422.0" promptText="password" />
+            <Button fx:id="registerBt" layoutX="611.0" layoutY="474.0" mnemonicParsing="false" onAction="#registerBtnClicked" text="Regisztrál" />
+            <TextField fx:id="usernameTF" layoutX="565.0" layoutY="222.0" promptText="Felhasználónév" />
+            <TextField fx:id="firstNameTF" layoutX="566.0" layoutY="272.0" promptText="Vezetéknév" />
+            <TextField fx:id="lastNameTF" layoutX="566.0" layoutY="322.0" promptText="Keresztnév" />
+            <TextField fx:id="emailTF" layoutX="565.0" layoutY="372.0" promptText="Email" />
+            <PasswordField fx:id="passwordTf" layoutX="566.0" layoutY="422.0" promptText="Jelszó" />
+            <Button fx:id="backButton" text="Vissza" onAction="#backToHome" layoutX="10" layoutY="10"/>
          </children>
       </AnchorPane>
    </children>

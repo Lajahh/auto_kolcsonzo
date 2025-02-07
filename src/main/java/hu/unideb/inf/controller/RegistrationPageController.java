@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.io.IOException;
 
 public class RegistrationPageController {
 
@@ -30,6 +31,8 @@ public class RegistrationPageController {
     private TextField emailTF;
     @FXML
     private Button registerBtn;
+    @FXML
+    private Button backButton;
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
@@ -69,6 +72,15 @@ public class RegistrationPageController {
         userDAO.insertUser(user);
 
         showSuccess("Sikeres regisztráció!", "A regisztráció sikeresen megtörtént.");
+        redirectToHomePage();
+    }
+
+    private void redirectToHomePage() {
+        try {
+            hu.unideb.inf.MainApp.setRoot("HomePage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showError(String title, String message) {
@@ -85,5 +97,14 @@ public class RegistrationPageController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void backToHome(ActionEvent event) {
+        try {
+            hu.unideb.inf.MainApp.setRoot("HomePage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -13,6 +13,7 @@
                 <TextField fx:id="usernameTF" layoutX="514.0" layoutY="260.0" promptText="Felhasználónév" />
                 <PasswordField fx:id="passwordPF" layoutX="514.0" layoutY="300.0" promptText="Jelszó" />
                 <Button fx:id="loginButton" layoutX="614.0" layoutY="340.0" onAction="#loginBtClicked" text="Bejelentkezés"  />
+                <Button fx:id="backButton" text="Vissza" onAction="#backToHome" layoutX="10" layoutY="10"/>
                 <Label fx:id="errorLabel" textFill="red" />
             </children>
         </AnchorPane>

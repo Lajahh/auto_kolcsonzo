@@ -1,5 +1,6 @@
 package hu.unideb.inf.controller;
 
+import hu.unideb.inf.model.User;
 import hu.unideb.inf.model.Vehicle;
 import hu.unideb.inf.model.VehicleType;
 import hu.unideb.inf.repository.VehicleDAO;
@@ -36,7 +37,11 @@ public class HomePageController implements Initializable {
     @FXML
     private Button adminPageBt;
     @FXML
+    private Button userPageBt;
+    @FXML
     private TextField searchTf;
+    @FXML
+    private Button logoutButton;
 
     @FXML
     private ComboBox<VehicleType> typeIDCB;
@@ -107,8 +112,37 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    private void adminPageBtClicked() throws IOException {
-        MainApp.setRoot("AdminPage");
+    private void adminPageBtClicked(ActionEvent event) throws IOException {
+        User loggedInUser = getLoggedInUser();
+
+        if (loggedInUser != null && loggedInUser.getIsAdmin() == 1) {
+            MainApp.setRoot("AdminPage");
+        } else {
+            showError("Hiba!", "Nincsenek admin jogosultságaid.");
+        }
+    }
+
+    @FXML
+    private void userPageBtClicked(ActionEvent event) throws IOException {
+        User loggedInUser = SessionManager.getCurrentUser();
+
+        if (loggedInUser != null) {
+            MainApp.setRoot("UserPage");
+        } else {
+            showError("Hiba!", "Először jelentkezz be!");
+        }
+    }
+
+    private User getLoggedInUser() {
+        return SessionManager.getCurrentUser();
+    }
+
+    private void showError(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
@@ -123,5 +157,34 @@ public class HomePageController implements Initializable {
 
     @FXML
     private void searchBtClicked(ActionEvent event) {
+        String searchText = searchTf.getText().toLowerCase();
+
+        FilteredList<Vehicle> filteredList = new FilteredList<>(vehicleList, vehicle -> {
+            if (searchText == null || searchText.isEmpty()) {
+                return true;
+            }
+
+            return (vehicle.getVehicleType() != null && vehicle.getVehicleType().toLowerCase().contains(searchText)) ||
+                    (vehicle.getMake() != null && vehicle.getMake().toLowerCase().contains(searchText)) ||
+                    (vehicle.getModel() != null && vehicle.getModel().toLowerCase().contains(searchText)) ||
+                    String.valueOf(vehicle.getYear()).contains(searchText) ||
+                    (vehicle.getEngine() != null && vehicle.getEngine().toLowerCase().contains(searchText)) ||
+                    (vehicle.getFuelType() != null && vehicle.getFuelType().toLowerCase().contains(searchText)) ||
+                    String.valueOf(vehicle.getSeatingCapacity()).contains(searchText) ||
+                    String.valueOf(vehicle.getPrice()).contains(searchText);
+        });
+
+        vehicleTable.setItems(filteredList);
     }
+
+    @FXML
+    private void logoutUser(ActionEvent event) {
+        SessionManager.logout();
+        try {
+            hu.unideb.inf.MainApp.setRoot("HomePage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

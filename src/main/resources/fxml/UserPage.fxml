@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1647.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.UserPageController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1647.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.UserPageController">
     <children>
         <AnchorPane prefHeight="732.0" prefWidth="1647.0">
             <children>
@@ -24,22 +20,11 @@
                         <TableColumn fx:id="TypeIDColumn" prefWidth="183.0" text="TypeID" />
                     </columns>
                 </TableView>
-            <Button fx:id="dieselBt" layoutX="660.0" layoutY="88.0" mnemonicParsing="false" onAction="#dieselBtClicked" text="Diesel">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="gasolineBt" layoutX="785.0" layoutY="88.0" mnemonicParsing="false" onAction="#gasolineBtClicked" text="Gasoline">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="hybridBt" layoutX="927.0" layoutY="88.0" mnemonicParsing="false" onAction="#hybridBtClicked" text="Hybrid">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-            <Button fx:id="rentBt" layoutX="1549.0" layoutY="119.0" mnemonicParsing="false" onAction="#rentBtClicked" text="Rent" />
+            <Button fx:id="backButton" layoutX="10" layoutY="10" onAction="#backToHome" text="Vissza" />
+            <Button fx:id="logoutButton" layoutX="10" layoutY="50" onAction="#logoutUser" text="Kijelentkezés" />
+            <TextField fx:id="searchTf" layoutX="749.0" layoutY="38.0" promptText="Keresés" />
+            <Button fx:id="searchBt" layoutX="795.0" layoutY="75.0" onAction="#searchBtClicked" text="Keresés" />
+            <Button fx:id="rentBt" layoutX="1549.0" layoutY="119.0" mnemonicParsing="false" onAction="#rentBtClicked" text="Kibérel" />
             </children>
         </AnchorPane>
     </children>

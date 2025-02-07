@@ -24,6 +24,8 @@ public class LoginPageController {
     private PasswordField passwordPF;
     @FXML
     private Button loginButton;
+    @FXML
+    private Button backButton;
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
@@ -46,15 +48,18 @@ public class LoginPageController {
         User user = authUser(username, password);
 
         if (user != null) {
+            SessionManager.setCurrentUser(user);
+
             if (user.getIsAdmin() == 1) {
-                openAdminPage();
+                MainApp.setRoot("HomePage");
             } else {
-                MainApp.setRoot("UserPage");
+                MainApp.setRoot("HomePage");
             }
         } else {
             showError("Hibás bejelentkezés!", "Hibás felhasználónév vagy jelszó.");
         }
     }
+
 
     private User authUser(String username, String password) {
         TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u WHERE u.username = :username AND u.password = :password", User.class);
@@ -86,5 +91,14 @@ public class LoginPageController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void backToHome(ActionEvent event) {
+        try {
+            hu.unideb.inf.MainApp.setRoot("HomePage");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
